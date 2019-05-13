@@ -59,17 +59,6 @@ def set_wifi_access_point(ssid, passw):
 st = set_wifi_connection([('SSID', 'password')])
 ap = set_wifi_access_point('mAccessPoint', 'password')
 
-def flash_button_hander(p):
-    LED = machine.Pin(2, machine.Pin.OUT)
-    LED.value(not LED.value())
-    mess = "LED value is " + str(1 - LED.value())
-    print(mess)
-    if(1 - LED.value() == 0):
-        heroku_wake_up_request()
-    gc.collect()
-flash_button = machine.Pin(0, machine.Pin.IN, machine.Pin.PULL_UP)
-flash_button.irq(handler= flash_button_hander, trigger= machine.Pin.IRQ_FALLING)
-
 def sen_hander(p):
     heroku_mess_request()
     print("Something Moving!")
